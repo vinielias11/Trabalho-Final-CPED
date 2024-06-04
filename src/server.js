@@ -1,3 +1,4 @@
+require('dotenv').config();
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const { google } = require('googleapis');
@@ -23,7 +24,7 @@ server.addService(translationProto.service, {
             const response = await translation.translations.list({
                 q: [text],
                 target: target_language,
-                auth: '',
+                auth: process.env.API_KEY,
                 format: 'text'
             });
 
