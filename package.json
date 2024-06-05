@@ -14,7 +14,9 @@
     "@grpc/grpc-js": "^1.10.8",
     "@grpc/proto-loader": "^0.7.13",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "googleapis": "^139.0.0",
-    "grpc-tools": "^1.12.4"
+    "grpc-tools": "^1.12.4",
+    "nodemon": "^3.1.3"
   }
 }

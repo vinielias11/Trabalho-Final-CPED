@@ -13,16 +13,17 @@ const translationProto = grpc.loadPackageDefinition(packageDefinition).Translati
 
 const client = new translationProto('localhost:50051', grpc.credentials.createInsecure());
 
-const request = {
-    text: 'Hello, world!',
-    target_language: 'es'
-};
 
-client.TranslateText(request, (error, response) => {
-    if (error) {
-        console.error(error);
-        return;
+
+module.exports = {
+    traduzirTexto: function (request, callback){
+        client.TranslateText(request, (error, response) => {
+            if (error) {
+                console.error(error);
+                return;
+            }
+            
+            callback(response.translated_text);
+        });
     }
-    
-    console.log('Translated text:', response.translated_text);
-});
+}
