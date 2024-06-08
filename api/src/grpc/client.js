@@ -1,7 +1,7 @@
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 
-const packageDefinition = protoLoader.loadSync('translation.proto', {
+const packageDefinition = protoLoader.loadSync('./translation.proto', {
     keepCase: true,
     longs: String,
     enums: String,

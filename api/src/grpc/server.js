@@ -4,7 +4,7 @@ const protoLoader = require('@grpc/proto-loader');
 const { google } = require('googleapis');
 const translation = google.translate('v2');
 
-const packageDefinition = protoLoader.loadSync('translation.proto', {
+const packageDefinition = protoLoader.loadSync('./translation.proto', {
     keepCase: true,
     longs: String,
     enums: String,
@@ -36,12 +36,18 @@ server.addService(translationProto.service, {
     }
 });
 
-const PORT = '50051';
-server.bindAsync(`127.0.0.1:${PORT}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
+const initGRPC = () => {
+    const PORT = '50051';
+    server.bindAsync(`127.0.0.1:${PORT}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    
+        console.log(`Servidor gRPC rodando na porta ${port}`);
+    });
+};
 
-    console.log(`Servidor rodando em: http://127.0.0.1:${port}`);
-});
+module.exports = {
+    initGRPC
+};
